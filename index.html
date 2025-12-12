@@ -20,38 +20,39 @@
         }
 
         body {
-            background-color: #000;
+            background: #000;
             color: #00ff00;
-            font-family: 'ProggyTiny', 'Courier New', monospace;
-            overflow: hidden;
+            font-family: 'ProggyTiny', monospace;
             height: 100vh;
+            overflow: hidden;
         }
 
+        /* SNOW */
         .snowflake {
             position: fixed;
             top: -10px;
-            z-index: 9998;
-            user-select: none;
+            color: #fff;
             pointer-events: none;
             animation: fall linear infinite;
-            color: #fff;
+            z-index: 9998;
         }
 
         @keyframes fall {
             to { transform: translateY(100vh); }
         }
 
+        /* ENTRY SCREEN */
         #entry-screen {
             position: fixed;
             inset: 0;
             background: rgba(0,0,0,0.95);
             backdrop-filter: blur(10px);
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             z-index: 10000;
-            transition: opacity 0.5s ease;
             cursor: pointer;
+            transition: opacity 0.5s ease;
         }
 
         #entry-screen.hidden {
@@ -70,26 +71,21 @@
             50% { opacity: 1; }
         }
 
-        #main-content {
+        /* MAIN */
+        #main {
             height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 20px;
         }
 
-        .ascii-art {
+        .ascii {
             font-size: 10px;
             white-space: pre;
             text-shadow: 0 0 5px #00ff00;
             margin-bottom: 30px;
-        }
-
-        .welcome-text {
-            margin-bottom: 25px;
-            font-size: 1.2rem;
         }
 
         a {
@@ -102,6 +98,7 @@
             text-shadow: 0 0 10px #00ff00;
         }
 
+        /* CRT */
         .scanlines {
             position: fixed;
             inset: 0;
@@ -129,67 +126,64 @@
 
 <body>
 
-    <!-- ENTRY -->
-    <div id="entry-screen">
-        <div id="entry-text">CLICK TO ENTER</div>
-    </div>
+<!-- ENTRY -->
+<div id="entry-screen">
+    <div id="entry-text">CLICK TO ENTER</div>
+</div>
 
-    <div class="scanlines"></div>
+<div class="scanlines"></div>
 
-    <!-- MAIN -->
-    <div id="main-content" class="crt">
-        <div class="ascii-art">
+<!-- MAIN CONTENT -->
+<div id="main" class="crt">
+<pre class="ascii">
                          __                       .__    .__              
   ________  _  _______ _/  |______ _______   ____ |  |__ |__|__  __ ____  
  /  ___/\ \/ \/ /\__  \\   __\__  \\_  __ \_/ ___\|  |  \|  \  \/ // __ \ 
  \___ \  \     /  / __ \|  |  / __ \|  | \/\  \___|   Y  \  |\   /\  ___/ 
 /____  >  \/\_/  (____  /__| (____  /__|    \___  >___|  /__| \_/  \___  >
      \/               \/          \/            \/     \/              \/
-        </div>
+</pre>
 
-        <div class="welcome-text">welcome to my site g</div>
+    <div>welcome to my site g</div>
+    <br>
+    <div>&gt; Telegram: <a href="https://t.me/swatarchive" target="_blank">@swatarchive</a></div>
+    <div>&gt; Message: fuck them niggers aye</div>
+</div>
 
-        <div>
-            &gt; Telegram:
-            <a href="https://t.me/swatarchive" target="_blank">@swatarchive</a>
-        </div>
-        <div>&gt; Message: my name is rocky</div>
-    </div>
+<!-- AUDIO -->
+<audio id="bg-music" loop preload="auto">
+    <source src="./files/song.mp3" type="audio/mpeg">
+</audio>
 
-    <!-- AUDIO -->
-    <audio id="bg-music" loop preload="auto">
-        <source src="files/song.mp3" type="audio/mpeg">
-    </audio>
+<!-- JS (INLINE ONLY) -->
+<script>
+    function snow() {
+        const s = document.createElement('div');
+        s.className = 'snowflake';
+        s.textContent = '❄';
+        s.style.left = Math.random() * innerWidth + 'px';
+        s.style.fontSize = (Math.random() * 12 + 8) + 'px';
+        s.style.opacity = Math.random();
+        s.style.animationDuration = (Math.random() * 3 + 2) + 's';
+        document.body.appendChild(s);
+        setTimeout(() => s.remove(), 5000);
+    }
+    setInterval(snow, 200);
 
-    <!-- JS -->
-    <script>
-        function createSnowflake() {
-            const s = document.createElement('div');
-            s.className = 'snowflake';
-            s.textContent = '❄';
-            s.style.left = Math.random() * innerWidth + 'px';
-            s.style.fontSize = (Math.random() * 12 + 8) + 'px';
-            s.style.opacity = Math.random();
-            s.style.animationDuration = (Math.random() * 3 + 2) + 's';
-            document.body.appendChild(s);
-            setTimeout(() => s.remove(), 5000);
-        }
-        setInterval(createSnowflake, 200);
+    const entry = document.getElementById('entry-screen');
+    const music = document.getElementById('bg-music');
 
-        const entry = document.getElementById('entry-screen');
-        const music = document.getElementById('bg-music');
+    entry.addEventListener('click', () => {
+        entry.classList.add('hidden');
 
-        entry.addEventListener('click', () => {
-            entry.classList.add('hidden');
-
-            // HARD audio unlock
-            music.muted = false;
-            music.volume = 1;
-            music.currentTime = 0;
-            music.load();
-            music.play().catch(err => console.log(err));
-        });
-    </script>
+        // unlock audio (GitHub Pages safe)
+        music.muted = false;
+        music.volume = 1;
+        music.currentTime = 0;
+        music.load();
+        music.play().catch(e => console.log(e));
+    });
+</script>
 
 </body>
 </html>
