@@ -4,54 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>swatarchive</title>
-
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
+    <link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet">
     <style>
-        @font-face {
-            font-family: 'ProggyTiny';
-            src: url('https://fonts.cdnfonts.com/s/14188/ProggyTiny.ttf') format('truetype');
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body {
-            background: #000;
-            color: #00ff00;
-            font-family: 'ProggyTiny', monospace;
-            height: 100vh;
-            overflow: hidden;
+        :root {
+            --terminal: #00ff00;
+            --bg: #000000;
+            --fg: #ffffff;
         }
 
-        /* SNOW */
+        body {
+            background-color: var(--bg);
+            color: var(--fg);
+            font-family: 'Minecraft', 'Courier New', monospace;
+            font-size: 20px;
+            line-height: 1.5;
+            overflow: hidden;
+            height: 100vh;
+            cursor: default;
+        }
+
+        /* Falling snowflakes */
         .snowflake {
             position: fixed;
             top: -10px;
-            color: #fff;
+            z-index: 9998;
+            user-select: none;
             pointer-events: none;
             animation: fall linear infinite;
-            z-index: 9998;
+            color: var(--fg);
+            font-size: 20px;
         }
 
         @keyframes fall {
-            to { transform: translateY(100vh); }
+            to {
+                transform: translateY(100vh);
+            }
         }
 
-        /* ENTRY SCREEN */
+        /* Entry screen */
         #entry-screen {
             position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.95);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
             backdrop-filter: blur(10px);
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             z-index: 10000;
-            cursor: pointer;
             transition: opacity 0.5s ease;
         }
 
@@ -62,50 +71,74 @@
 
         #entry-text {
             font-size: 3rem;
-            animation: pulse 2s infinite;
-            text-shadow: 0 0 10px #00ff00;
+            color: var(--terminal);
+            animation: pulse 2s ease-in-out infinite;
+            text-shadow: 0 0 10px var(--terminal);
         }
 
         @keyframes pulse {
-            0%,100% { opacity: 0.6; }
+            0%, 100% { opacity: 0.6; }
             50% { opacity: 1; }
         }
 
-        /* MAIN */
-        #main {
-            height: 100vh;
+        /* Main content */
+        #main-content {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            height: 100vh;
+            overflow-y: auto;
+            padding: 20px;
             text-align: center;
         }
 
-        .ascii {
+        .ascii-art {
+            color: var(--terminal);
+            font-family: 'Courier New', monospace; /* Fixed font for art */
             font-size: 10px;
+            line-height: 1.2;
             white-space: pre;
-            text-shadow: 0 0 5px #00ff00;
+            text-shadow: 0 0 5px var(--terminal);
             margin-bottom: 30px;
         }
 
+        .welcome-text {
+            margin-bottom: 30px;
+            text-shadow: 0 0 5px var(--terminal);
+            font-size: 1.2rem;
+        }
+
+        .info-section {
+            margin-bottom: 20px;
+        }
+
+        .info-section > div {
+            margin: 5px 0;
+        }
+
         a {
-            color: #00ff00;
+            color: var(--terminal);
             text-decoration: none;
+            transition: color 0.3s, text-shadow 0.3s;
         }
 
         a:hover {
-            color: #fff;
-            text-shadow: 0 0 10px #00ff00;
+            color: var(--fg);
+            text-shadow: 0 0 10px var(--terminal);
         }
 
-        /* CRT */
+        /* CRT-ish overlay */
         .scanlines {
             position: fixed;
-            inset: 0;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: linear-gradient(
                 to bottom,
                 transparent 50%,
-                rgba(0,255,0,0.03) 50%
+                rgba(0, 255, 0, 0.03) 50%
             );
             background-size: 100% 4px;
             pointer-events: none;
@@ -121,69 +154,189 @@
             50% { opacity: 1; }
             100% { opacity: 0.98; }
         }
+
+        /* Source view override */
+        #source-view {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
+            color: #ffffff;
+            z-index: 20000;
+            padding: 20px;
+            overflow: auto;
+            text-align: left;
+            font-family: monospace;
+        }
+
+        #source-pre {
+            color: #ffffff;
+            white-space: pre;
+            font-family: monospace;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+        }
+
+        /* Body class for Source Mode to hide other elements */
+        body.source-mode .snowflake,
+        body.source-mode .scanlines,
+        body.source-mode #main-content,
+        body.source-mode #entry-screen {
+            display: none !important;
+        }
+        
+        body.source-mode #source-view {
+            display: block !important;
+        }
+        
+        body.source-mode {
+            overflow: auto; /* Allow scrolling in source mode */
+        }
     </style>
 </head>
-
 <body>
+    <div id="entry-screen">
+        <div id="entry-text">CLICK TO ENTER</div>
+    </div>
 
-<!-- ENTRY -->
-<div id="entry-screen">
-    <div id="entry-text">click to enter ig</div>
-</div>
+    <div class="scanlines"></div>
 
-<div class="scanlines"></div>
-
-<!-- MAIN CONTENT -->
-<div id="main" class="crt">
-<pre class="ascii">
-                         __                       .__    .__              
+    <div id="main-content" class="crt">
+        <div id="home-view">
+            <div class="ascii-art">                         __                       .__    .__              
   ________  _  _______ _/  |______ _______   ____ |  |__ |__|__  __ ____  
  /  ___/\ \/ \/ /\__  \\   __\__  \\_  __ \_/ ___\|  |  \|  \  \/ // __ \ 
  \___ \  \     /  / __ \|  |  / __ \|  | \/\  \___|   Y  \  |\   /\  ___/ 
 /____  >  \/\_/  (____  /__| (____  /__|    \___  >___|  /__| \_/  \___  >
-     \/               \/          \/            \/     \/              \/
-</pre>
+     \/               \/          \/            \/     \/              \/</div>
 
-    <div>stay positive 👌</div>
-    <br>
-    <div>&gt; Telegram: <a href="https://t.me/swatarchive" target="_blank">@swatarchive</a></div>
-    <div>&gt; Message: blue bands</div>
-</div>
+            <div class="welcome-text">welcome to my site g</div>
 
-<!-- AUDIO -->
-<audio id="bg-music" loop preload="auto">
-    <source src="./files/song.mp3" type="audio/mpeg">
-</audio>
+            <div class="info-section">
+                <div>&gt; Telegram: <a href="https://t.me/swatarchive" target="_blank" rel="noopener noreferrer">@swatarchive</a></div>
+                <div>&gt; <a href="/source" id="source-link">SOURCE</a></div>
+                <div>&gt; Message: hi</div>
+            </div>
+        </div>
+    </div>
 
-<!-- JS (INLINE ONLY) -->
-<script>
-    function snow() {
-        const s = document.createElement('div');
-        s.className = 'snowflake';
-        s.textContent = '❄';
-        s.style.left = Math.random() * innerWidth + 'px';
-        s.style.fontSize = (Math.random() * 12 + 8) + 'px';
-        s.style.opacity = Math.random();
-        s.style.animationDuration = (Math.random() * 3 + 2) + 's';
-        document.body.appendChild(s);
-        setTimeout(() => s.remove(), 5000);
-    }
-    setInterval(snow, 200);
+    <div id="source-view">
+        <div style="margin-bottom: 10px;">
+            <a href="/" id="back-home" style="color: #ffffff; text-decoration: underline;">&lt; Back</a>
+        </div>
+        <pre id="source-pre"></pre>
+    </div>
 
-    const entry = document.getElementById('entry-screen');
-    const music = document.getElementById('bg-music');
+    <audio id="bg-music" loop preload="auto">
+        <source src="/files/song.mp3" type="audio/mpeg">
+    </audio>
 
-    entry.addEventListener('click', () => {
-        entry.classList.add('hidden');
+    <script>
+        // Snapshot for fallback
+        const ORIGINAL_HTML_FALLBACK = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
 
-        // unlock audio (GitHub Pages safe)
-        music.muted = false;
-        music.volume = 1;
-        music.currentTime = 0;
-        music.load();
-        music.play().catch(e => console.log(e));
-    });
-</script>
+        function createSnowflake() {
+            // Do not create snowflakes if in source mode
+            if (document.body.classList.contains('source-mode')) return;
 
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.textContent = '❄';
+            snowflake.style.left = Math.random() * window.innerWidth + 'px';
+            snowflake.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            snowflake.style.opacity = Math.random();
+            snowflake.style.fontSize = (Math.random() * 10 + 10) + 'px';
+            document.body.appendChild(snowflake);
+            setTimeout(() => snowflake.remove(), 5000);
+        }
+
+        setInterval(createSnowflake, 200);
+
+        const entryScreen = document.getElementById('entry-screen');
+        const bgMusic = document.getElementById('bg-music');
+        const sourcePre = document.getElementById('source-pre');
+        const sourceLink = document.getElementById('source-link');
+        const backHomeLink = document.getElementById('back-home');
+
+        function tryPlayMusic() {
+            if (!bgMusic || document.body.classList.contains('source-mode')) return;
+            bgMusic.play().catch(() => {});
+        }
+
+        function enterSite() {
+            if (!entryScreen.classList.contains('hidden')) {
+                entryScreen.classList.add('hidden');
+                tryPlayMusic();
+            }
+        }
+
+        async function loadSourceOnce() {
+            if (!sourcePre || sourcePre.dataset.loaded === '1') return;
+            sourcePre.dataset.loaded = '1';
+            
+            // Just use the current DOM state as source, cleaned up slightly if needed
+            // Or fetch. Since we are in single file, fetch index.html might work or fail.
+            // Safest is to just dump documentElement.
+            sourcePre.textContent = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+        }
+
+        function handleRouting() {
+            const path = window.location.pathname;
+            // Check if path is /source or if hash is #source (backward compat/fallback)
+            const isSource = path === '/source' || window.location.hash === '#source';
+
+            if (isSource) {
+                document.body.classList.add('source-mode');
+                document.title = 'index.html'; // "just have white text and that text being the index.html source"
+                if (bgMusic) bgMusic.pause();
+                loadSourceOnce();
+            } else {
+                document.body.classList.remove('source-mode');
+                document.title = 'swatarchive';
+                // Only resume music if we have passed the entry screen
+                if (entryScreen.classList.contains('hidden')) {
+                    tryPlayMusic();
+                }
+            }
+        }
+
+        // Intercept Link Clicks
+        if (sourceLink) {
+            sourceLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                history.pushState({}, "", "/source");
+                handleRouting();
+            });
+        }
+
+        if (backHomeLink) {
+            backHomeLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                history.pushState({}, "", "/");
+                handleRouting();
+            });
+        }
+
+        // Handle browser back/forward
+        window.addEventListener('popstate', handleRouting);
+
+        // Initial load
+        window.addEventListener('load', () => {
+            // If user lands on /source directly (if server supports)
+            handleRouting();
+            
+            // If not source, try music (though usually blocked by browser until interaction)
+            if (!document.body.classList.contains('source-mode')) {
+                tryPlayMusic();
+            }
+        });
+
+        entryScreen.addEventListener('click', enterSite);
+        document.addEventListener('keydown', enterSite);
+    </script>
 </body>
 </html>
