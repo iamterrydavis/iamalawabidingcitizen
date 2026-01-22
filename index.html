@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,600,700&f[]=inter@300,400,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>swat</title>
-
-  <meta name="description" content="swat — software developer">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <title>swat | Developer</title>
+  <meta name="description" content="swat — Software Developer & Engineer">
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -15,40 +15,133 @@
 
 <canvas id="bg"></canvas>
 <div class="cursor"></div>
+<div class="scanlines"></div>
+<div class="terminal-overlay"></div>
 
 <button id="themeToggle">◐</button>
 
-<main>
+<div class="terminal-loader" id="terminalLoader">
+  <div class="terminal-header">
+    <div class="terminal-title">system@swat:~</div>
+    <div class="terminal-controls">
+      <span class="control minimize"></span>
+      <span class="control maximize"></span>
+      <span class="control close"></span>
+    </div>
+  </div>
+  <div class="terminal-body">
+    <div class="terminal-line">Initializing system...</div>
+    <div class="terminal-line">Loading developer profile...</div>
+    <div class="terminal-line">Establishing secure connection...</div>
+    <div class="terminal-line">Welcome, swat.</div>
+    <div class="terminal-line blink">$ ready</div>
+  </div>
+</div>
+
+<main class="hidden">
   <section class="hero">
-    <h1><span>swat</span></h1>
-    <p>software developer</p>
+    <h1><span class="glitch" data-text="swat">swat</span></h1>
+    <p class="subtitle">// Software Developer & Engineer</p>
   </section>
 
   <section class="card">
-    <h2>Languages</h2>
+    <h2><i class="fas fa-code"></i> Core Technologies</h2>
     <div class="skills">
-      <span>Python</span>
-      <span>HTML</span>
-      <span>Lua</span>
-      <span>Luau</span>
-      <span>C++</span>
+      <div class="skill-item">
+        <i class="devicon-python-plain colored"></i>
+        <span>Python</span>
+      </div>
+      <div class="skill-item">
+        <i class="devicon-html5-plain colored"></i>
+        <span>HTML/CSS</span>
+      </div>
+      <div class="skill-item">
+        <i class="devicon-lua-plain colored"></i>
+        <span>Lua/Luau</span>
+      </div>
+      <div class="skill-item">
+        <i class="devicon-cplusplus-plain colored"></i>
+        <span>C++</span>
+      </div>
+      <div class="skill-item">
+        <i class="devicon-javascript-plain colored"></i>
+        <span>JavaScript</span>
+      </div>
+      <div class="skill-item">
+        <i class="devicon-nodejs-plain colored"></i>
+        <span>Node.js</span>
+      </div>
+      <div class="skill-item">
+        <i class="devicon-git-plain colored"></i>
+        <span>Git</span>
+      </div>
+      <div class="skill-item">
+        <i class="devicon-linux-plain colored"></i>
+        <span>Linux</span>
+      </div>
     </div>
   </section>
 
   <section class="card">
-    <h2>Connect</h2>
+    <h2><i class="fas fa-network-wired"></i> Connect</h2>
     <div class="links">
-      <a href="#" class="telegram">Telegram</a>
-      <a href="#" class="discord">Discord</a>
+      <a href="#" class="link-btn telegram">
+        <i class="fab fa-telegram"></i>
+        <span>Telegram</span>
+      </a>
+      <a href="#" class="link-btn discord">
+        <i class="fab fa-discord"></i>
+        <span>Discord</span>
+      </a>
+      <a href="#" class="link-btn github">
+        <i class="fab fa-github"></i>
+        <span>GitHub</span>
+      </a>
+      <a href="#" class="link-btn email">
+        <i class="fas fa-envelope"></i>
+        <span>Email</span>
+      </a>
     </div>
   </section>
 
   <section class="card">
-    <h2>Ambient</h2>
-    <audio id="audio" controls autoplay loop>
-      <source src="/files/song.mp3" type="audio/mpeg">
-    </audio>
+    <h2><i class="fas fa-wave-square"></i> Ambient Workspace</h2>
+    <div class="audio-player">
+      <div class="audio-controls">
+        <button id="playBtn" class="audio-btn"><i class="fas fa-play"></i></button>
+        <button id="pauseBtn" class="audio-btn"><i class="fas fa-pause"></i></button>
+        <button id="stopBtn" class="audio-btn"><i class="fas fa-stop"></i></button>
+        <div class="volume-control">
+          <i class="fas fa-volume-up"></i>
+          <input type="range" id="volumeSlider" min="0" max="100" value="70">
+        </div>
+      </div>
+      <div class="audio-visualizer" id="visualizer"></div>
+      <div class="audio-info">
+        <span class="audio-title">Synthwave Ambient</span>
+        <span class="audio-time" id="currentTime">0:00</span>
+      </div>
+      <audio id="audio" loop>
+        <source src="https://assets.codepen.io/1468070/synthwave-ambient.mp3" type="audio/mpeg">
+      </audio>
+    </div>
   </section>
+
+  <footer class="card">
+    <div class="footer-content">
+      <div class="status">
+        <span class="status-dot active"></span>
+        <span class="status-text">Currently available for freelance work</span>
+      </div>
+      <div class="footer-links">
+        <a href="#">Projects</a>
+        <a href="#">Resume</a>
+        <a href="#">Blog</a>
+        <a href="#">Contact</a>
+      </div>
+      <p class="copyright">© 2024 swat. All systems operational.</p>
+    </div>
+  </footer>
 </main>
 
 <script src="main.js"></script>
