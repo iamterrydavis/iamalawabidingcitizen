@@ -1,19 +1,77 @@
-/* ICONS */
-.icons {
-  display: flex;
-  justify-content: center;
-  gap: 28px;
-  flex-wrap: wrap;
+.tech-stack {
+  margin-top: 80px;
+  text-align: center;
 }
 
-.icons img {
-  width: 52px;
-  height: 52px;
-  filter: drop-shadow(0 0 12px rgba(180,140,255,0.4));
-  transition: transform 0.3s, filter 0.3s;
+.tech-stack h2 {
+  font-size: 1.8rem;
+  letter-spacing: 0.1em;
+  color: #e7d8ff;
+  margin-bottom: 36px;
 }
 
-.icons img:hover {
-  transform: translateY(-6px) scale(1.08);
-  filter: drop-shadow(0 0 22px rgba(255,255,255,0.9));
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 32px;
+  max-width: 720px;
+  margin: auto;
+}
+
+.tech-card {
+  position: relative;
+  padding: 26px 18px;
+  border-radius: 18px;
+
+  background: linear-gradient(
+    180deg,
+    rgba(140,90,255,0.18),
+    rgba(40,20,80,0.45)
+  );
+
+  backdrop-filter: blur(14px);
+  box-shadow:
+    0 20px 40px rgba(0,0,0,0.5),
+    inset 0 0 0 1px rgba(255,255,255,0.06);
+
+  transform-style: preserve-3d;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.tech-card img {
+  width: 46px;
+  height: 46px;
+  filter: invert(1) drop-shadow(0 0 12px rgba(180,120,255,0.7));
+}
+
+.tech-card span {
+  display: block;
+  margin-top: 14px;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  color: #ddd;
+}
+
+.tech-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at top,
+    rgba(255,255,255,0.2),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.tech-card:hover {
+  transform: translateY(-10px) rotateX(8deg);
+  box-shadow:
+    0 35px 80px rgba(180,120,255,0.35);
+}
+
+.tech-card:hover::before {
+  opacity: 1;
 }
