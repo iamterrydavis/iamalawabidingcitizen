@@ -48,4 +48,20 @@ function animate() {
     }
 
     p.x += p.vx;
-    p.y += p.vy
+    p.y += p.vy;
+
+    p.vx *= 0.98;
+    p.vy *= 0.98;
+
+    if (p.x < 0 || p.x > w) p.vx *= -1;
+    if (p.y < 0 || p.y > h) p.vy *= -1;
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(180,140,255,${Math.max(0.15, 1 - dist / 300)})`;
+    ctx.fill();
+  });
+
+  requestAnimationFrame(animate);
+}
+animate();
