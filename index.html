@@ -1,76 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>swat</title>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>swat</title>
 
-  <!-- Fonts -->
-  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,600,700&f[]=jetbrains-mono@400&display=swap" rel="stylesheet">
+  <meta name="description" content="swat — software developer">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<!-- TERMINAL INTRO -->
-<div id="terminal">
-  <pre id="terminalText"></pre>
-</div>
+<canvas id="bg"></canvas>
+<div class="cursor"></div>
 
-<!-- PARTICLES -->
-<canvas id="three"></canvas>
+<button id="themeToggle">◐</button>
 
-<!-- AUDIO -->
-<audio id="audio" src="/files/song.mp3" loop></audio>
-
-<!-- UI -->
-<main id="ui">
+<main>
   <section class="hero">
-    <h1>swat</h1>
-    <p>developer · systems · realtime</p>
+    <h1><span>swat</span></h1>
+    <p>software developer</p>
   </section>
 
-<section class="tech-stack">
-  <h2>Stack</h2>
-
-  <div class="tech-grid">
-    <div class="tech-card">
-      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/python.svg">
+  <section class="card">
+    <h2>Languages</h2>
+    <div class="skills">
       <span>Python</span>
-    </div>
-
-    <div class="tech-card">
-      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/html5.svg">
       <span>HTML</span>
-    </div>
-
-    <div class="tech-card">
-      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/lua.svg">
       <span>Lua</span>
-    </div>
-
-    <div class="tech-card">
-      <img src="https://raw.githubusercontent.com/Roblox/creator-docs/main/static/img/luau-logo.svg">
       <span>Luau</span>
-    </div>
-
-    <div class="tech-card">
-      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/cplusplus.svg">
       <span>C++</span>
     </div>
-  </div>
-</section>
-
+  </section>
 
   <section class="card">
     <h2>Connect</h2>
     <div class="links">
-      <a href="#">Telegram</a>
-      <a href="#">Discord</a>
+      <a href="#" class="telegram">Telegram</a>
+      <a href="#" class="discord">Discord</a>
     </div>
+  </section>
+
+  <section class="card">
+    <h2>Ambient</h2>
+    <audio id="audio" controls autoplay loop>
+      <source src="/files/song.mp3" type="audio/mpeg">
+    </audio>
   </section>
 </main>
 
-<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
 <script src="main.js"></script>
 </body>
 </html>
