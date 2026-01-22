@@ -1,140 +1,175 @@
 :root {
-  --bg: #05020a;
-  --accent: #b26cff;
-  --glass: rgba(255,255,255,0.06);
-  --border: rgba(178,108,255,0.25);
+  --bg: #05030a;
+  --panel: rgba(255,255,255,0.045);
+  --border: rgba(178,108,255,0.18);
+  --accent: #b48cff;
+  --text: #f2effa;
+  --muted: #b9b2cc;
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Montserrat', sans-serif;
 }
 
 body {
-  background: var(--bg);
-  color: white;
+  background: radial-gradient(circle at top, #12081f, var(--bg));
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
   overflow-x: hidden;
 }
 
 canvas {
   position: fixed;
   inset: 0;
+  z-index: -2;
+}
+
+/* soft vignette */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 60%, #000 100%);
+  pointer-events: none;
   z-index: -1;
 }
 
 main {
-  max-width: 900px;
+  max-width: 960px;
   margin: auto;
-  padding: 100px 30px;
+  padding: 120px 30px 80px;
 }
 
+/* HERO */
 .hero {
   text-align: center;
-  margin-bottom: 100px;
+  margin-bottom: 110px;
 }
 
 .hero h1 {
-  font-size: 4.5rem;
+  font-family: 'Satoshi', sans-serif;
+  font-size: 4.8rem;
   letter-spacing: 4px;
+  font-weight: 700;
 }
 
 .hero h1 span {
   color: var(--accent);
-  text-shadow: 0 0 40px rgba(178,108,255,0.8);
+  text-shadow:
+    0 0 20px rgba(180,140,255,0.6),
+    0 0 60px rgba(180,140,255,0.25);
 }
 
 .hero p {
-  color: #cbb9ff;
-  margin-top: 10px;
-  letter-spacing: 2px;
+  margin-top: 14px;
+  color: var(--muted);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-size: 0.8rem;
 }
 
+/* PANELS */
 .card {
-  background: var(--glass);
-  backdrop-filter: blur(20px);
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.06),
+    rgba(255,255,255,0.02)
+  );
   border: 1px solid var(--border);
-  border-radius: 24px;
-  padding: 35px;
-  margin-bottom: 40px;
-  box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+  border-radius: 26px;
+  padding: 40px;
+  margin-bottom: 45px;
+  backdrop-filter: blur(22px);
+  box-shadow:
+    0 40px 80px rgba(0,0,0,0.65),
+    inset 0 0 40px rgba(180,140,255,0.05);
 }
 
 .card h2 {
+  font-family: 'Satoshi', sans-serif;
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+  margin-bottom: 24px;
   color: var(--accent);
-  margin-bottom: 20px;
 }
 
+/* SKILLS */
 .skills {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 14px;
 }
 
 .skills span {
-  padding: 10px 18px;
+  padding: 12px 20px;
   border-radius: 999px;
   border: 1px solid var(--border);
-  background: rgba(178,108,255,0.12);
+  background: rgba(180,140,255,0.1);
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
+.skills span:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 22px rgba(180,140,255,0.45);
+}
+
+/* LINKS */
 .links {
   display: flex;
-  gap: 20px;
+  gap: 22px;
 }
 
 .links a {
   flex: 1;
+  padding: 18px;
   text-align: center;
-  padding: 15px;
-  border-radius: 18px;
+  border-radius: 20px;
   text-decoration: none;
   color: white;
-  font-weight: 600;
+  font-family: 'Satoshi', sans-serif;
+  letter-spacing: 1px;
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .telegram {
-  background: linear-gradient(135deg, #2aabee, #8f6bff);
+  background: linear-gradient(135deg, #2aabee, #8a6cff);
 }
 
 .discord {
-  background: linear-gradient(135deg, #5865f2, #b26cff);
+  background: linear-gradient(135deg, #5865f2, #b48cff);
 }
 
 .links a:hover {
   transform: translateY(-6px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.6);
 }
 
+/* AUDIO */
 audio {
   width: 100%;
-  filter: drop-shadow(0 0 15px rgba(178,108,255,0.6));
+  filter: drop-shadow(0 0 16px rgba(180,140,255,0.45));
 }
 
-/* cursor */
+/* CURSOR */
 .cursor {
   position: fixed;
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, var(--accent), transparent 60%);
   border-radius: 50%;
   pointer-events: none;
-  background: radial-gradient(circle, #b26cff, transparent 60%);
   mix-blend-mode: screen;
   transform: translate(-50%, -50%);
   z-index: 9999;
 }
 
-/* theme toggle */
-#themeToggle {
-  position: fixed;
-  top: 25px;
-  right: 25px;
-  background: none;
-  border: 1px solid var(--border);
-  color: white;
-  padding: 10px 14px;
-  border-radius: 12px;
-  cursor: pointer;
+/* MOBILE */
+@media (max-width: 600px) {
+  .hero h1 {
+    font-size: 3.2rem;
+  }
 }
