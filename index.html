@@ -3,11 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <title>swat</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Fonts -->
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,600,700&f[]=jetbrains-mono@400&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -17,14 +16,17 @@
   <pre id="terminalText"></pre>
 </div>
 
-<!-- THREE CANVAS -->
+<!-- THREE -->
 <canvas id="three"></canvas>
+
+<!-- AUDIO -->
+<audio id="audio" src="/files/song.mp3" loop></audio>
 
 <!-- UI -->
 <main id="ui">
   <section class="hero">
     <h1>swat</h1>
-    <p>software developer</p>
+    <p>developer · systems · realtime</p>
   </section>
 
   <section class="card">
@@ -39,11 +41,10 @@
   </section>
 
   <section class="card">
-    <h2>Projects</h2>
-    <div class="projects">
-      <div class="project">Amethyst Engine</div>
-      <div class="project">Realtime Systems</div>
-      <div class="project">AI Tools</div>
+    <h2>Work</h2>
+    <div class="frames">
+      <div class="frame"><img src="/files/project1.jpg"></div>
+      <div class="frame"><img src="/files/project2.jpg"></div>
     </div>
   </section>
 
@@ -53,13 +54,6 @@
       <a href="#">Telegram</a>
       <a href="#">Discord</a>
     </div>
-  </section>
-
-  <section class="card">
-    <h2>Ambient</h2>
-    <audio id="audio" controls autoplay loop>
-      <source src="/files/song.mp3" type="audio/mpeg">
-    </audio>
   </section>
 </main>
 
