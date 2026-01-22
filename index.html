@@ -3,35 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Swat</title>
+    <title>swat — developer</title>
+
+    <meta name="description" content="swat — developer specializing in Python, HTML, Lua, Luau, and C++">
+    <meta name="author" content="swat">
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="container">
-        <h1 class="name">swat</h1>
-        <p class="subtitle">Developer</p>
+    <!-- Background glow -->
+    <div class="bg-glow"></div>
 
-        <div class="languages">
-            <span>Python</span>
-            <span>HTML</span>
-            <span>Lua</span>
-            <span>Luau</span>
-            <span>C++</span>
-        </div>
+    <main class="page">
 
-        <div class="buttons">
-            <a href="https://t.me/swatarchive" class="btn telegram" target="_blank">Telegram</a>
-            <a href="https://discord.com/users/1268592012026712116" class="btn discord" target="_blank">Discord</a>
-        </div>
+        <!-- HERO -->
+        <section class="hero">
+            <h1 class="hero-name">
+                <span class="glow-text">swat</span>
+            </h1>
+            <p class="hero-subtitle">Software Developer</p>
+        </section>
 
-        <div class="music-player">
+        <!-- SKILLS -->
+        <section class="card">
+            <h2>Languages</h2>
+            <div class="skills">
+                <span>Python</span>
+                <span>HTML</span>
+                <span>Lua</span>
+                <span>Luau</span>
+                <span>C++</span>
+            </div>
+        </section>
+
+        <!-- SOCIAL -->
+        <section class="card">
+            <h2>Connect</h2>
+            <div class="social-buttons">
+                <a href="#" target="_blank" class="social-btn telegram">
+                    Telegram
+                </a>
+                <a href="#" target="_blank" class="social-btn discord">
+                    Discord
+                </a>
+            </div>
+        </section>
+
+        <!-- MUSIC -->
+        <section class="card">
+            <h2>Now Playing</h2>
             <audio controls autoplay loop>
                 <source src="/files/song.mp3" type="audio/mpeg">
-                Your browser does not support the audio element.
+                Your browser does not support audio.
             </audio>
-        </div>
-    </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer>
+            <p>© <span id="year"></span> swat</p>
+        </footer>
+
+    </main>
+
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
 
 </body>
 </html>
