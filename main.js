@@ -94,6 +94,7 @@ function animate() {
     col[ix]   = 0.7 + t * 0.3;
     col[ix+1] = 0.4 + t * 0.6;
     col[ix+2] = 1.0;
+    pos[ix+1] += Math.sin(Date.now() * 0.0005 + i) * 0.0006;
   }
 
   geometry.attributes.color.needsUpdate = true;
