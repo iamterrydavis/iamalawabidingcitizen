@@ -1,31 +1,33 @@
-/* ================= TERMINAL INTRO ================= */
-const terminalText = document.getElementById("terminalText");
+/* ================= TERMINAL ================= */
 const terminal = document.getElementById("terminal");
+const terminalText = document.getElementById("terminalText");
+const audio = document.getElementById("audio");
 
-const lines = [
-  "swat@void:~$ boot",
-  "loading shaders...",
-  "initializing crystal field...",
-  "syncing audio analyzer...",
-  "done.",
+const boot = [
+  "swat@void:~$ init",
+  "loading crystal field...",
+  "binding audio stream...",
+  "ready."
 ];
 
-let i = 0;
-function typeLine() {
-  if (i < lines.length) {
-    terminalText.textContent += lines[i] + "\n";
-    i++;
-    setTimeout(typeLine, 600);
+let l = 0;
+(function type() {
+  if (l < boot.length) {
+    terminalText.textContent += boot[l++] + "\n";
+    setTimeout(type, 500);
   } else {
-    setTimeout(() => terminal.style.display = "none", 800);
+    setTimeout(() => {
+      terminal.style.opacity = 0;
+      setTimeout(() => terminal.remove(), 800);
+      audio.play();
+    }, 800);
   }
-}
-typeLine();
+})();
 
-/* ================= THREE.JS ================= */
+/* ================= THREE ================= */
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(60, innerWidth/innerHeight, 0.1, 1000);
-camera.position.z = 8;
+const camera = new THREE.PerspectiveCamera(60, innerWidth/innerHeight, 0.1, 100);
+camera.position.z = 10;
 
 const renderer = new THREE.WebGLRenderer({
   canvas: document.getElementById("three"),
@@ -33,45 +35,55 @@ const renderer = new THREE.WebGLRenderer({
   antialias: true
 });
 renderer.setSize(innerWidth, innerHeight);
-renderer.setPixelRatio(devicePixelRatio);
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
 
-/* LIGHTING */
-scene.add(new THREE.AmbientLight(0xb48cff, 0.6));
-const point = new THREE.PointLight(0xb48cff, 2);
-point.position.set(3, 4, 6);
-scene.add(point);
+/* ================= SHADER ================= */
+const material = new THREE.ShaderMaterial({
+  transparent: true,
+  uniforms: {
+    time: { value: 0 },
+    mouse: { value: new THREE.Vector2() }
+  },
+  vertexShader: `
+    uniform float time;
+    uniform vec2 mouse;
+    varying float vGlow;
 
-/* AMETHYST SHARDS */
-const shards = [];
-for (let i = 0; i < 60; i++) {
-  const geo = new THREE.ConeGeometry(
-    Math.random() * 0.3 + 0.1,
-    Math.random() * 1.5 + 0.5,
-    6
-  );
-  const mat = new THREE.MeshStandardMaterial({
-    color: 0xb48cff,
-    emissive: 0x3a145f,
-    roughness: 0.25,
-    metalness: 0.6
-  });
-  const mesh = new THREE.Mesh(geo, mat);
-  mesh.position.set(
-    (Math.random() - 0.5) * 12,
-    (Math.random() - 0.5) * 12,
-    (Math.random() - 0.5) * 12
-  );
-  mesh.rotation.set(
-    Math.random() * Math.PI,
-    Math.random() * Math.PI,
-    Math.random() * Math.PI
-  );
-  scene.add(mesh);
-  shards.push(mesh);
+    void main() {
+      vec3 p = position;
+      float d = distance(p.xy, mouse * 5.0);
+      vGlow = smoothstep(2.0, 0.0, d);
+      p.z += sin(time + p.x * 4.0) * 0.2;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
+      gl_PointSize = 2.5 + vGlow * 4.0;
+    }
+  `,
+  fragmentShader: `
+    varying float vGlow;
+    void main() {
+      float d = length(gl_PointCoord - 0.5);
+      float a = smoothstep(0.5, 0.1, d);
+      gl_FragColor = vec4(0.7, 0.4, 1.0, a * (0.4 + vGlow));
+    }
+  `
+});
+
+/* ================= PARTICLES (INSTANCED) ================= */
+const count = 2000;
+const geo = new THREE.BufferGeometry();
+const pos = new Float32Array(count * 3);
+
+for (let i = 0; i < count; i++) {
+  pos[i*3] = (Math.random() - 0.5) * 20;
+  pos[i*3+1] = (Math.random() - 0.5) * 20;
+  pos[i*3+2] = (Math.random() - 0.5) * 10;
 }
 
-/* ================= AUDIO REACTIVITY ================= */
-const audio = document.getElementById("audio");
+geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+const particles = new THREE.Points(geo, material);
+scene.add(particles);
+
+/* ================= AUDIO ================= */
 const ctx = new AudioContext();
 const src = ctx.createMediaElementSource(audio);
 const analyser = ctx.createAnalyser();
@@ -80,23 +92,21 @@ analyser.connect(ctx.destination);
 analyser.fftSize = 128;
 const data = new Uint8Array(analyser.frequencyBinCount);
 
-audio.onplay = () => ctx.resume();
-
-/* ================= SCROLL CAMERA ================= */
-window.addEventListener("scroll", () => {
-  camera.position.y = -window.scrollY * 0.003;
+/* ================= INTERACTION ================= */
+const mouse = new THREE.Vector2();
+window.addEventListener("mousemove", e => {
+  mouse.x = (e.clientX / innerWidth) * 2 - 1;
+  mouse.y = -(e.clientY / innerHeight) * 2 + 1;
+  material.uniforms.mouse.value = mouse;
 });
 
 /* ================= ANIMATE ================= */
-function animate() {
-  analyser.getByteFrequencyData(data);
-  const bass = data[2] / 255;
+function animate(t) {
+  material.uniforms.time.value = t * 0.001;
 
-  shards.forEach(s => {
-    s.rotation.y += 0.002 + bass * 0.03;
-    s.rotation.x += 0.001;
-    s.scale.setScalar(1 + bass * 0.4);
-  });
+  analyser.getByteFrequencyData(data);
+  camera.position.x += (mouse.x * 1.5 - camera.position.x) * 0.05;
+  camera.position.y += (mouse.y * 1.5 - camera.position.y) * 0.05;
 
   renderer.render(scene, camera);
   requestAnimationFrame(animate);
@@ -104,8 +114,8 @@ function animate() {
 animate();
 
 /* RESIZE */
-window.addEventListener("resize", () => {
-  camera.aspect = innerWidth / innerHeight;
+addEventListener("resize", () => {
+  camera.aspect = innerWidth/innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(innerWidth, innerHeight);
 });
