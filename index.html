@@ -5,7 +5,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <title>swat | Developer</title>
   <meta name="description" content="swat — Software Developer & Engineer">
   <link rel="stylesheet" href="style.css">
@@ -22,7 +23,7 @@
 
 <div class="terminal-loader" id="terminalLoader">
   <div class="terminal-header">
-    <div class="terminal-title">system@swat:~</div>
+    <div class="terminal-title">swat@void:~</div>
     <div class="terminal-controls">
       <span class="control minimize"></span>
       <span class="control maximize"></span>
@@ -30,116 +31,194 @@
     </div>
   </div>
   <div class="terminal-body">
-    <div class="terminal-line">Initializing system...</div>
-    <div class="terminal-line">Loading developer profile...</div>
-    <div class="terminal-line">Establishing secure connection...</div>
-    <div class="terminal-line">Welcome, swat.</div>
-    <div class="terminal-line blink">$ ready</div>
+    <div class="terminal-line">swat@void:~$ whoami</div>
+    <div class="terminal-line response">swat</div>
+    <div class="terminal-line">swat@void:~$ uname -a</div>
+    <div class="terminal-line response">Linux void 6.5.0-kali1 #1 SMP PREEMPT_DYNAMIC Debian 6.5.6-1kali1 (2023-10-09) x86_64 GNU/Linux</div>
+    <div class="terminal-line">swat@void:~$ cat /proc/version</div>
+    <div class="terminal-line response">Linux version 6.5.0-kali1 (kali@kali) (gcc (Debian 12.2.0-14) 12.2.0, GNU ld (GNU Binutils for Kali) 2.40) #1 SMP PREEMPT_DYNAMIC Debian 6.5.6-1kali1 (2023-10-09)</div>
+    <div class="terminal-line">swat@void:~$ ls -la ~/projects</div>
+    <div class="terminal-line response">total 48<br>
+drwxr-xr-x 12 swat swat 4096 Dec 15 09:30 .<br>
+drwxr-xr-x 18 swat swat 4096 Dec 15 09:30 ..<br>
+drwxr-xr-x  6 swat swat 4096 Dec 15 09:30 web-dev<br>
+drwxr-xr-x  7 swat swat 4096 Dec 15 09:30 security-tools<br>
+drwxr-xr-x  8 swat swat 4096 Dec 15 09:30 game-dev<br>
+drwxr-xr-x  5 swat swat 4096 Dec 15 09:30 ai-ml<br>
+drwxr-xr-x  6 swat swat 4096 Dec 15 09:30 reverse-engineering</div>
+    <div class="terminal-line">swat@void:~$ systemctl status portfolio</div>
+    <div class="terminal-line response">● portfolio.service - swat portfolio<br>
+     Loaded: loaded (/etc/systemd/system/portfolio.service; enabled; preset: enabled)<br>
+     Active: active (running) since Thu 2024-12-15 09:30:00 UTC; 2s ago<br>
+   Main PID: 1337 (portfolio)<br>
+      Tasks: 5 (limit: 18827)<br>
+     Memory: 45.7M<br>
+        CPU: 412ms<br>
+     CGroup: /system.slice/portfolio.service</div>
+    <div class="terminal-line">swat@void:~$ echo "Initialization complete"</div>
+    <div class="terminal-line response">Initialization complete</div>
+    <div class="terminal-line">swat@void:~$ <span class="blink">█</span></div>
   </div>
 </div>
 
 <main class="hidden">
   <section class="hero">
     <h1><span class="glitch" data-text="swat">swat</span></h1>
-    <p class="subtitle">// Software Developer & Engineer</p>
+    <p class="subtitle">// Software Developer & Security Engineer</p>
+    <p class="terminal-tag">root@void:~# <span class="typewriter">access granted</span></p>
   </section>
 
   <section class="card">
-    <h2><i class="fas fa-code"></i> Core Technologies</h2>
+    <h2><i class="fas fa-terminal"></i> Core Technologies</h2>
     <div class="skills">
       <div class="skill-item">
         <i class="devicon-python-plain colored"></i>
         <span>Python</span>
+        <div class="skill-level">
+          <div class="level-bar" style="width: 90%"></div>
+        </div>
       </div>
       <div class="skill-item">
         <i class="devicon-html5-plain colored"></i>
         <span>HTML/CSS</span>
+        <div class="skill-level">
+          <div class="level-bar" style="width: 85%"></div>
+        </div>
       </div>
       <div class="skill-item">
         <i class="devicon-lua-plain colored"></i>
         <span>Lua/Luau</span>
+        <div class="skill-level">
+          <div class="level-bar" style="width: 95%"></div>
+        </div>
       </div>
       <div class="skill-item">
         <i class="devicon-cplusplus-plain colored"></i>
         <span>C++</span>
+        <div class="skill-level">
+          <div class="level-bar" style="width: 75%"></div>
+        </div>
       </div>
       <div class="skill-item">
         <i class="devicon-javascript-plain colored"></i>
         <span>JavaScript</span>
+        <div class="skill-level">
+          <div class="level-bar" style="width: 80%"></div>
+        </div>
       </div>
       <div class="skill-item">
         <i class="devicon-nodejs-plain colored"></i>
         <span>Node.js</span>
+        <div class="skill-level">
+          <div class="level-bar" style="width: 70%"></div>
+        </div>
       </div>
       <div class="skill-item">
-        <i class="devicon-git-plain colored"></i>
-        <span>Git</span>
+        <i class="devicon-bash-plain colored"></i>
+        <span>Bash/Zsh</span>
+        <div class="skill-level">
+          <div class="level-bar" style="width: 88%"></div>
+        </div>
       </div>
       <div class="skill-item">
         <i class="devicon-linux-plain colored"></i>
         <span>Linux</span>
+        <div class="skill-level">
+          <div class="level-bar" style="width: 92%"></div>
+        </div>
       </div>
     </div>
   </section>
 
   <section class="card">
-    <h2><i class="fas fa-network-wired"></i> Connect</h2>
+    <h2><i class="fas fa-network-wired"></i> Network Connections</h2>
     <div class="links">
       <a href="#" class="link-btn telegram">
         <i class="fab fa-telegram"></i>
         <span>Telegram</span>
+        <span class="link-status">online</span>
       </a>
       <a href="#" class="link-btn discord">
         <i class="fab fa-discord"></i>
         <span>Discord</span>
+        <span class="link-status">idle</span>
       </a>
       <a href="#" class="link-btn github">
         <i class="fab fa-github"></i>
         <span>GitHub</span>
+        <span class="link-status">active</span>
       </a>
-      <a href="#" class="link-btn email">
+      <a href="mailto:contact@swat.dev" class="link-btn email">
         <i class="fas fa-envelope"></i>
         <span>Email</span>
+        <span class="link-status">reachable</span>
       </a>
     </div>
   </section>
 
   <section class="card">
-    <h2><i class="fas fa-wave-square"></i> Ambient Workspace</h2>
-    <div class="audio-player">
-      <div class="audio-controls">
-        <button id="playBtn" class="audio-btn"><i class="fas fa-play"></i></button>
-        <button id="pauseBtn" class="audio-btn"><i class="fas fa-pause"></i></button>
-        <button id="stopBtn" class="audio-btn"><i class="fas fa-stop"></i></button>
-        <div class="volume-control">
+    <h2><i class="fas fa-satellite-dish"></i> Ambient Workspace</h2>
+    <div class="audio-info">
+      <div class="audio-header">
+        <span class="audio-title">/var/ambient/synthwave.mp3</span>
+        <span class="audio-status">
           <i class="fas fa-volume-up"></i>
-          <input type="range" id="volumeSlider" min="0" max="100" value="70">
-        </div>
+          <span class="status-text">● STREAMING</span>
+        </span>
       </div>
       <div class="audio-visualizer" id="visualizer"></div>
-      <div class="audio-info">
-        <span class="audio-title">Synthwave Ambient</span>
-        <span class="audio-time" id="currentTime">0:00</span>
+      <div class="audio-stats">
+        <span class="stat">
+          <i class="fas fa-wifi"></i>
+          <span>Bitrate: 320kbps</span>
+        </span>
+        <span class="stat">
+          <i class="fas fa-code"></i>
+          <span>Codec: MP3</span>
+        </span>
+        <span class="stat">
+          <i class="fas fa-server"></i>
+          <span>Buffer: <span id="bufferStatus">100%</span></span>
+        </span>
       </div>
-      <audio id="audio" loop>
-        <source src="https://assets.codepen.io/1468070/synthwave-ambient.mp3" type="audio/mpeg">
-      </audio>
     </div>
+    <audio id="audio" autoplay loop>
+      <source src="/files/song.mp3" type="audio/mpeg">
+      <source src="https://assets.codepen.io/1468070/synthwave-ambient.mp3" type="audio/mpeg">
+    </audio>
   </section>
 
   <footer class="card">
     <div class="footer-content">
-      <div class="status">
-        <span class="status-dot active"></span>
-        <span class="status-text">Currently available for freelance work</span>
+      <div class="system-status">
+        <div class="status-item">
+          <span class="status-label">SYSTEM</span>
+          <span class="status-value active">OPERATIONAL</span>
+        </div>
+        <div class="status-item">
+          <span class="status-label">UPTIME</span>
+          <span class="status-value">99.8%</span>
+        </div>
+        <div class="status-item">
+          <span class="status-label">LOAD</span>
+          <span class="status-value">0.2 0.1 0.05</span>
+        </div>
+        <div class="status-item">
+          <span class="status-label">THREAT</span>
+          <span class="status-value safe">NONE</span>
+        </div>
       </div>
       <div class="footer-links">
-        <a href="#">Projects</a>
-        <a href="#">Resume</a>
-        <a href="#">Blog</a>
-        <a href="#">Contact</a>
+        <a href="#"><i class="fas fa-folder"></i> Projects</a>
+        <a href="#"><i class="fas fa-file-code"></i> Resume</a>
+        <a href="#"><i class="fas fa-blog"></i> Blog</a>
+        <a href="#"><i class="fas fa-terminal"></i> SSH</a>
+        <a href="#"><i class="fas fa-shield-alt"></i> Security</a>
       </div>
-      <p class="copyright">© 2024 swat. All systems operational.</p>
+      <p class="copyright">
+        <i class="fas fa-terminal"></i> © 2024 swat@void:~$ cat /etc/motd<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;All systems operational. No unauthorized access detected.
+      </p>
     </div>
   </footer>
 </main>
