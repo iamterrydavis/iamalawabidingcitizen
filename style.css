@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: radial-gradient(circle at top, #1a1a1a, #000000);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 40px 50px;
+    text-align: center;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+    animation: fadeIn 1s ease forwards;
+}
+
+.name {
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: lowercase;
+}
+
+.subtitle {
+    color: #b0b0b0;
+    margin-top: 5px;
+    margin-bottom: 25px;
+    font-weight: 300;
+}
+
+.languages {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.languages span {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.languages span:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.btn {
+    text-decoration: none;
+    padding: 12px 22px;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.telegram {
+    background: linear-gradient(135deg, #2aabee, #1c8dd9);
+    color: white;
+}
+
+.discord {
+    background: linear-gradient(135deg, #5865F2, #404EED);
+    color: white;
+}
+
+.btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+.music-player audio {
+    width: 100%;
+    margin-top: 10px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
