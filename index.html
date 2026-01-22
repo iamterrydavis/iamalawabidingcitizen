@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,600,700&f[]=inter@300,400,500&display=swap" rel="stylesheet">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>swat - cool</title>
+  <meta charset="UTF-8" />
+  <title>swat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <meta name="description" content="swat — software developer">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- Fonts -->
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,600,700&f[]=jetbrains-mono@400&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<canvas id="bg"></canvas>
-<div class="cursor"></div>
+<!-- TERMINAL INTRO -->
+<div id="terminal">
+  <pre id="terminalText"></pre>
+</div>
 
-<button id="themeToggle">◐</button>
+<!-- THREE CANVAS -->
+<canvas id="three"></canvas>
 
-<main>
+<!-- UI -->
+<main id="ui">
   <section class="hero">
-    <h1><span>swat</span></h1>
+    <h1>swat</h1>
     <p>software developer</p>
   </section>
 
@@ -36,10 +39,19 @@
   </section>
 
   <section class="card">
+    <h2>Projects</h2>
+    <div class="projects">
+      <div class="project">Amethyst Engine</div>
+      <div class="project">Realtime Systems</div>
+      <div class="project">AI Tools</div>
+    </div>
+  </section>
+
+  <section class="card">
     <h2>Connect</h2>
     <div class="links">
-      <a href="#" class="telegram">Telegram</a>
-      <a href="#" class="discord">Discord</a>
+      <a href="#">Telegram</a>
+      <a href="#">Discord</a>
     </div>
   </section>
 
@@ -51,6 +63,7 @@
   </section>
 </main>
 
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
 <script src="main.js"></script>
 </body>
 </html>
