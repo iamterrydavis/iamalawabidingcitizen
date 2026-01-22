@@ -216,23 +216,6 @@ main.hidden {
   border-radius: 0;
 }
 
-/* MOBILE TERMINAL */
-@media (max-width: 768px) {
-  .terminal-loader {
-    width: 95%;
-    height: 320px;
-    font-size: 13px;
-  }
-  
-  .terminal-body {
-    padding: 12px;
-  }
-  
-  .terminal-line {
-    font-size: 13px;
-    line-height: 1.3;
-  }
-}
 /* HERO */
 .hero {
   text-align: center;
@@ -309,34 +292,6 @@ main.hidden {
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   margin-bottom: 20px;
-}
-
-.terminal-tag {
-  font-family: 'Courier New', monospace;
-  color: var(--terminal-green);
-  font-size: 1.1rem;
-  letter-spacing: 1px;
-  margin-top: 20px;
-  text-shadow: 0 0 10px var(--terminal-glow);
-}
-
-.typewriter {
-  color: #ffffff;
-  display: inline-block;
-  overflow: hidden;
-  border-right: 2px solid var(--terminal-green);
-  white-space: nowrap;
-  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
-}
-
-@keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
-}
-
-@keyframes blink-caret {
-  from, to { border-color: transparent }
-  50% { border-color: var(--terminal-green) }
 }
 
 /* PANELS */
@@ -514,17 +469,6 @@ main.hidden {
   transform: translateY(-5px);
   box-shadow: 0 20px 40px rgba(0,0,0,0.3);
   border-color: rgba(255,255,255,0.2);
-}
-
-.link-status {
-  margin-left: auto;
-  font-size: 0.7rem;
-  padding: 4px 8px;
-  border-radius: 10px;
-  background: rgba(0,255,157,0.1);
-  color: var(--terminal-green);
-  font-family: 'Courier New', monospace;
-  border: 1px solid rgba(0,255,157,0.3);
 }
 
 .telegram {
@@ -757,7 +701,17 @@ audio {
   
   .terminal-loader {
     width: 95%;
-    font-size: 12px;
+    height: 320px;
+    font-size: 13px;
+  }
+  
+  .terminal-body {
+    padding: 12px;
+  }
+  
+  .terminal-line {
+    font-size: 13px;
+    line-height: 1.3;
   }
   
   .skills {
