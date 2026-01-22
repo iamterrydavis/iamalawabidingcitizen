@@ -1,67 +1,111 @@
-/* CUSTOM CURSOR */
-const cursor = document.querySelector('.cursor');
-window.addEventListener('mousemove', e => {
-  cursor.style.left = e.clientX + 'px';
-  cursor.style.top = e.clientY + 'px';
-});
+/* ================= TERMINAL INTRO ================= */
+const terminalText = document.getElementById("terminalText");
+const terminal = document.getElementById("terminal");
 
-/* CANVAS */
-const canvas = document.getElementById('bg');
-const ctx = canvas.getContext('2d');
+const lines = [
+  "swat@void:~$ boot",
+  "loading shaders...",
+  "initializing crystal field...",
+  "syncing audio analyzer...",
+  "done.",
+];
 
-let w, h;
-function resize() {
-  w = canvas.width = window.innerWidth;
-  h = canvas.height = window.innerHeight;
+let i = 0;
+function typeLine() {
+  if (i < lines.length) {
+    terminalText.textContent += lines[i] + "\n";
+    i++;
+    setTimeout(typeLine, 600);
+  } else {
+    setTimeout(() => terminal.style.display = "none", 800);
+  }
 }
-resize();
-window.addEventListener('resize', resize);
+typeLine();
 
-/* MOUSE */
-const mouse = { x: 0, y: 0 };
-window.addEventListener('mousemove', e => {
-  mouse.x = e.clientX;
-  mouse.y = e.clientY;
+/* ================= THREE.JS ================= */
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(60, innerWidth/innerHeight, 0.1, 1000);
+camera.position.z = 8;
+
+const renderer = new THREE.WebGLRenderer({
+  canvas: document.getElementById("three"),
+  alpha: true,
+  antialias: true
+});
+renderer.setSize(innerWidth, innerHeight);
+renderer.setPixelRatio(devicePixelRatio);
+
+/* LIGHTING */
+scene.add(new THREE.AmbientLight(0xb48cff, 0.6));
+const point = new THREE.PointLight(0xb48cff, 2);
+point.position.set(3, 4, 6);
+scene.add(point);
+
+/* AMETHYST SHARDS */
+const shards = [];
+for (let i = 0; i < 60; i++) {
+  const geo = new THREE.ConeGeometry(
+    Math.random() * 0.3 + 0.1,
+    Math.random() * 1.5 + 0.5,
+    6
+  );
+  const mat = new THREE.MeshStandardMaterial({
+    color: 0xb48cff,
+    emissive: 0x3a145f,
+    roughness: 0.25,
+    metalness: 0.6
+  });
+  const mesh = new THREE.Mesh(geo, mat);
+  mesh.position.set(
+    (Math.random() - 0.5) * 12,
+    (Math.random() - 0.5) * 12,
+    (Math.random() - 0.5) * 12
+  );
+  mesh.rotation.set(
+    Math.random() * Math.PI,
+    Math.random() * Math.PI,
+    Math.random() * Math.PI
+  );
+  scene.add(mesh);
+  shards.push(mesh);
+}
+
+/* ================= AUDIO REACTIVITY ================= */
+const audio = document.getElementById("audio");
+const ctx = new AudioContext();
+const src = ctx.createMediaElementSource(audio);
+const analyser = ctx.createAnalyser();
+src.connect(analyser);
+analyser.connect(ctx.destination);
+analyser.fftSize = 128;
+const data = new Uint8Array(analyser.frequencyBinCount);
+
+audio.onplay = () => ctx.resume();
+
+/* ================= SCROLL CAMERA ================= */
+window.addEventListener("scroll", () => {
+  camera.position.y = -window.scrollY * 0.003;
 });
 
-/* PARTICLES */
-const particles = Array.from({ length: 140 }, () => ({
-  x: Math.random() * w,
-  y: Math.random() * h,
-  vx: (Math.random() - 0.5) * 0.25,
-  vy: (Math.random() - 0.5) * 0.25,
-  size: Math.random() * 2 + 1
-}));
-
+/* ================= ANIMATE ================= */
 function animate() {
-  ctx.clearRect(0, 0, w, h);
+  analyser.getByteFrequencyData(data);
+  const bass = data[2] / 255;
 
-  particles.forEach(p => {
-    const dx = mouse.x - p.x;
-    const dy = mouse.y - p.y;
-    const dist = Math.sqrt(dx * dx + dy * dy);
-
-    if (dist < 160) {
-      const force = (160 - dist) / 160;
-      p.vx -= dx * force * 0.0006;
-      p.vy -= dy * force * 0.0006;
-    }
-
-    p.x += p.vx;
-    p.y += p.vy;
-
-    p.vx *= 0.98;
-    p.vy *= 0.98;
-
-    if (p.x < 0 || p.x > w) p.vx *= -1;
-    if (p.y < 0 || p.y > h) p.vy *= -1;
-
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(180,140,255,${Math.max(0.15, 1 - dist / 300)})`;
-    ctx.fill();
+  shards.forEach(s => {
+    s.rotation.y += 0.002 + bass * 0.03;
+    s.rotation.x += 0.001;
+    s.scale.setScalar(1 + bass * 0.4);
   });
 
+  renderer.render(scene, camera);
   requestAnimationFrame(animate);
 }
 animate();
+
+/* RESIZE */
+window.addEventListener("resize", () => {
+  camera.aspect = innerWidth / innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+});
