@@ -114,10 +114,10 @@ main.hidden {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 800px;
+  width: 700px;
   max-width: 90%;
-  max-height: 80vh;
-  background: rgba(5, 3, 10, 0.98);
+  max-height: 60vh;
+  background: rgba(5, 3, 10, 0.95);
   border: 1px solid var(--terminal-green);
   border-radius: 8px;
   box-shadow: 
@@ -126,7 +126,7 @@ main.hidden {
   z-index: 10000;
   overflow: hidden;
   font-family: 'Courier New', monospace;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .terminal-header {
@@ -163,20 +163,21 @@ main.hidden {
 .control.close { background: var(--terminal-red); }
 
 .terminal-body {
-  padding: 20px;
-  line-height: 1.6;
-  height: calc(80vh - 60px);
+  padding: 25px;
+  line-height: 1.8;
+  height: calc(60vh - 60px);
   overflow-y: auto;
   background: rgba(0, 0, 0, 0.7);
 }
 
 .terminal-line {
   color: var(--terminal-green);
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   font-family: 'Courier New', monospace;
   opacity: 0;
   white-space: pre-wrap;
   word-break: break-all;
+  font-size: 16px;
 }
 
 .terminal-line.response {
@@ -197,11 +198,28 @@ main.hidden {
 
 .blink {
   animation: blink 1s infinite;
+  color: var(--terminal-green);
 }
 
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
+}
+
+/* MOBILE ADJUSTMENTS */
+@media (max-width: 768px) {
+  .terminal-loader {
+    width: 95%;
+    font-size: 14px;
+  }
+  
+  .terminal-body {
+    padding: 15px;
+  }
+  
+  .terminal-line {
+    font-size: 14px;
+  }
 }
 
 /* HERO */
