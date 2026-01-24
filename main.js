@@ -4,22 +4,22 @@ const mainContent = document.querySelector('main');
 
 // Full terminal script as requested
 const terminalScript = [
-  {text: "swat@void:~$ whoami", delay: 300, type: true},
-  {text: "swat", delay: 400, type: false, isResponse: true},
-  {text: "swat@void:~$ uname -a", delay: 300, type: true},
-  {text: "Linux void 6.5.0-kali1-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.5.6-1kali1 (2023-10-09) x86_64 GNU/Linux", delay: 600, type: false, isResponse: true},
-  {text: "swat@void:~$ cat /proc/version", delay: 300, type: true},
-  {text: "Linux version 6.5.0-kali1-amd64 (devel@kali.org) (gcc (Debian 12.2.0-14) 12.2.0, GNU ld (GNU Binutils for Debian) 2.40) #1 SMP PREEMPT_DYNAMIC Debian 6.5.6-1kali1 (2023-10-09)", delay: 500, type: false, isResponse: true},
-  {text: "swat@void:~$ systemctl --user status portfolio", delay: 300, type: true},
-  {text: "● portfolio.service - swat Portfolio", delay: 100, type: false, isResponse: true, multiline: true},
-  {text: "     Loaded: loaded (/home/swat/.config/systemd/user/portfolio.service; enabled; preset: enabled)", delay: 100, type: false, isResponse: true, multiline: true},
-  {text: "     Active: active (running) since Fri 2024-01-05 00:00:00 UTC; 2s ago", delay: 100, type: false, isResponse: true, multiline: true},
-  {text: "   Main PID: 1337 (portfolio)", delay: 100, type: false, isResponse: true, multiline: true},
-  {text: "        CPU: 45ms", delay: 100, type: false, isResponse: true, multiline: true},
+  {text: "swat@void:~$ whoami", delay: 50, type: true},
+  {text: "swat", delay: 50, type: false, isResponse: true},
+  {text: "swat@void:~$ uname -a", delay: 50, type: true},
+  {text: "Linux void 6.5.0-kali1-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.5.6-1kali1 (2023-10-09) x86_64 GNU/Linux", delay: 50, type: false, isResponse: true},
+  {text: "swat@void:~$ cat /proc/version", delay: 50, type: true},
+  {text: "Linux version 6.5.0-kali1-amd64 (devel@kali.org) (gcc (Debian 12.2.0-14) 12.2.0, GNU ld (GNU Binutils for Debian) 2.40) #1 SMP PREEMPT_DYNAMIC Debian 6.5.6-1kali1 (2023-10-09)", delay: 50, type: false, isResponse: true},
+  {text: "swat@void:~$ systemctl --user status portfolio", delay: 50, type: true},
+  {text: "● portfolio.service - swat Portfolio", delay: 50, type: false, isResponse: true, multiline: true},
+  {text: "     Loaded: loaded (/home/swat/.config/systemd/user/portfolio.service; enabled; preset: enabled)", delay: 50, type: false, isResponse: true, multiline: true},
+  {text: "     Active: active (running) since Fri 2024-01-05 00:00:00 UTC; 2s ago", delay: 50, type: false, isResponse: true, multiline: true},
+  {text: "   Main PID: 1337 (portfolio)", delay: 50, type: false, isResponse: true, multiline: true},
+  {text: "        CPU: 45ms", delay: 50, type: false, isResponse: true, multiline: true},
   {text: "     Memory: 8.2M", delay: 100, type: false, isResponse: true, multiline: true},
-  {text: "swat@void:~$ echo \"System ready.\"", delay: 300, type: true},
-  {text: "System ready.", delay: 300, type: false, isResponse: true},
-  {text: "swat@void:~$ ", delay: 200, type: true, final: true}
+  {text: "swat@void:~$ echo \"System ready.\"", delay: 50, type: true},
+  {text: "System ready.", delay: 50, type: false, isResponse: true},
+  {text: "swat@void:~$ ", delay: 50, type: true, final: true}
 ];
 
 async function runTerminalScript() {
